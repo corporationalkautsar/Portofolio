@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" fill="none">
+  <defs>
+    <linearGradient id="pg" x1="0" y1="0" x2="800" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#181818"/><stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="pp" x1="200" y1="180" x2="650" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b5ff3c" stop-opacity="0.65"/><stop offset="0.55" stop-color="#5b5b5b" stop-opacity="0.6"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.1"/>
+    </linearGradient>
+    <pattern id="pgrid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" stroke="#ffffff" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#pg)"/>
+  <rect width="800" height="1000" fill="url(#pgrid)"/>
+  <circle cx="400" cy="380" r="170" stroke="url(#pp)" stroke-width="2"/>
+  <path d="M130 1000c0-190 121-330 270-330s270 140 270 330" stroke="url(#pp)" stroke-width="2"/>
+  <circle cx="400" cy="380" r="120" fill="url(#pp)" fill-opacity="0.12"/>
+  <text x="60" y="930" font-family="Arial, Helvetica, sans-serif" font-size="26" letter-spacing="9" fill="#ffffff" fill-opacity="0.55">YOUR PHOTO</text>
+  <text x="740" y="80" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="6" fill="#b5ff3c" fill-opacity="0.8">PLACEHOLDER</text>
+</svg>
