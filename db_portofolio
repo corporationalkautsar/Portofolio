@@ -1,0 +1,686 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Nov 24, 2026 at 02:28 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.3.36
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `portofolio`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cache`
+--
+
+CREATE TABLE `cache` (
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cache_locks`
+--
+
+CREATE TABLE `cache_locks` (
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
+(7, 'Portfolio', 'portfolio', '2026-11-22 05:17:30', '2026-11-22 05:17:30'),
+(8, 'Landing Page', 'landing-page', '2026-11-22 05:17:30', '2026-11-22 05:17:30'),
+(9, 'Company Profile', 'company-profile', '2026-11-22 05:17:30', '2026-11-22 05:17:30'),
+(10, 'Web App', 'web-app', '2026-11-22 05:17:30', '2026-11-22 05:17:30'),
+(11, 'E-Commerce', 'e-commerce', '2026-11-22 05:17:30', '2026-11-22 05:17:30'),
+(12, 'Dashboard', 'dashboard', '2026-11-22 05:17:30', '2026-11-22 05:17:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_messages`
+--
+
+CREATE TABLE `contact_messages` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint UNSIGNED NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `id` bigint UNSIGNED NOT NULL,
+  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attempts` tinyint UNSIGNED NOT NULL,
+  `reserved_at` int UNSIGNED DEFAULT NULL,
+  `available_at` int UNSIGNED NOT NULL,
+  `created_at` int UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_batches`
+--
+
+CREATE TABLE `job_batches` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_jobs` int NOT NULL,
+  `pending_jobs` int NOT NULL,
+  `failed_jobs` int NOT NULL,
+  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext COLLATE utf8mb4_unicode_ci,
+  `cancelled_at` int DEFAULT NULL,
+  `created_at` int NOT NULL,
+  `finished_at` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '0001_01_01_000000_create_users_table', 1),
+(2, '0001_01_01_000001_create_cache_table', 1),
+(3, '0001_01_01_000002_create_jobs_table', 1),
+(4, '2026_11_21_120311_create_personal_access_tokens_table', 1),
+(5, '2026_11_21_120400_create_categories_table', 1),
+(6, '2026_11_21_120401_create_skills_table', 1),
+(7, '2026_11_21_120402_create_services_table', 1),
+(8, '2026_11_21_120403_create_profiles_table', 1),
+(9, '2026_11_21_120404_create_social_links_table', 1),
+(10, '2026_11_21_120405_create_contact_messages_table', 1),
+(11, '2026_11_21_120406_create_settings_table', 1),
+(12, '2026_11_21_120407_create_projects_table', 1),
+(13, '2026_11_21_120408_add_is_admin_to_users_table', 1),
+(14, '2026_11_22_000000_add_biography_locales_to_profiles_table', 2),
+(15, '2026_11_22_010000_add_stack_to_projects_table', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profiles`
+--
+
+CREATE TABLE `profiles` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profession` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `biography` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `biography_id` longtext COLLATE utf8mb4_unicode_ci,
+  `biography_en` longtext COLLATE utf8mb4_unicode_ci,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `whatsapp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `profiles`
+--
+
+INSERT INTO `profiles` (`id`, `name`, `profession`, `biography`, `biography_id`, `biography_en`, `photo`, `email`, `whatsapp`, `location`, `created_at`, `updated_at`) VALUES
+(1, 'Muhammad Iqbal Fadholi', 'SISWA SMK REKAYASA PERANGKAT LUNAK (RPL)', '## Tentang Saya\n\nHalo! Saya adalah siswa SMK jurusan **Rekayasa Perangkat Lunak (RPL)** yang memiliki ketertarikan besar terhadap dunia teknologi, khususnya pengembangan website.\n\nSaya senang mempelajari dan membangun website yang modern, responsif, serta mudah digunakan. Dalam proses pengembangan, saya terbiasa menggunakan berbagai teknologi seperti **HTML, CSS, JavaScript, Vue.js, PHP, dan Laravel**.\n\nSaya memiliki semangat untuk terus belajar, mengeksplorasi teknologi baru, dan mengembangkan kemampuan dalam menciptakan solusi digital yang kreatif dan fungsional.\n\nBagi saya, setiap proyek bukan hanya tentang menulis kode, tetapi juga tentang proses belajar, berkembang, dan menciptakan sesuatu yang bermanfaat.', '## Tentang Saya\n\nHalo! Saya adalah siswa SMK jurusan **Rekayasa Perangkat Lunak (RPL)** yang memiliki ketertarikan besar terhadap dunia teknologi, khususnya pengembangan website.\n\nSaya senang mempelajari dan membangun website yang modern, responsif, serta mudah digunakan. Dalam proses pengembangan, saya terbiasa menggunakan berbagai teknologi seperti **HTML, CSS, JavaScript, Vue.js, PHP, dan Laravel**.\n\nSaya memiliki semangat untuk terus belajar, mengeksplorasi teknologi baru, dan mengembangkan kemampuan dalam menciptakan solusi digital yang kreatif dan fungsional.\n\nBagi saya, setiap proyek bukan hanya tentang menulis kode, tetapi juga tentang proses belajar, berkembang, dan menciptakan sesuatu yang bermanfaat.', '## About Me\n\nHi, I\'m a Software Engineering student and aspiring Web Developer.\n\nI\'m passionate about building modern, responsive, and interactive websites. I enjoy turning ideas into digital experiences through clean code and creative problem-solving.\n\nCurrently, I\'m exploring and developing my skills in **HTML, CSS, JavaScript, Vue.js, PHP, and Laravel**. I love learning new technologies, experimenting with different ideas, and continuously improving my development skills.\n\nI\'m always excited to take on new challenges, build meaningful projects, and grow as a developer.\n\n**Code. Create. Innovate. Repeat.**', 'images/profile/muhammad-iqbal-fadholi.png', 'akunmlbb223434@gmail.com', 'https://wa.me/6281515274402', 'Besuki, Situbondo, Jawa Timur, Indonesia', '2026-11-21 07:06:52', '2026-11-22 05:17:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects`
+--
+
+CREATE TABLE `projects` (
+  `id` bigint UNSIGNED NOT NULL,
+  `category_id` bigint UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stack` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `year` year NOT NULL,
+  `featured` tinyint(1) NOT NULL DEFAULT '0',
+  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'published',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `category_id`, `title`, `slug`, `description`, `stack`, `thumbnail`, `project_image`, `project_url`, `year`, `featured`, `status`, `created_at`, `updated_at`) VALUES
+(9, 7, 'Personal Portfolio', 'personal-portfolio', 'A responsive personal portfolio with a dark editorial theme, smooth motion and language switching.', 'HTML, CSS, JavaScript, Vue.js, Laravel', 'images/placeholders/web-01.svg', 'images/placeholders/web-01.svg', NULL, '2026', 0, 'published', '2026-11-22 05:17:30', '2026-11-22 06:25:30'),
+(10, 8, 'Landing Page — Kopi Senja', 'landing-page-kopi-senja', 'A one-page landing site with a bold hero, menu highlights and a working contact section.', 'HTML, CSS, JavaScript', 'images/placeholders/web-02.svg', 'images/placeholders/web-02.svg', NULL, '2026', 0, 'published', '2026-11-22 05:17:30', '2026-11-22 06:25:30'),
+(11, 9, 'Company Profile — Kreatif Studio', 'company-profile-kreatif-studio', 'A company profile website with a simple content manager and a clean, readable layout.', 'Laravel, PHP, JavaScript', 'images/placeholders/web-03.svg', 'images/placeholders/web-03.svg', NULL, '2026', 0, 'published', '2026-11-22 05:17:30', '2026-11-22 06:25:30'),
+(12, 10, 'School News Portal', 'school-news-portal', 'A news portal where admins can publish, edit and organize school announcements.', 'Laravel, PHP, JavaScript', 'images/placeholders/web-04.svg', 'images/placeholders/web-04.svg', NULL, '2026', 0, 'published', '2026-11-22 05:17:30', '2026-11-22 06:25:30'),
+(13, 11, 'Simple E-Commerce', 'simple-e-commerce', 'A small online store with a product catalog, cart flow and order handling.', 'Vue.js, Laravel, PHP', 'images/placeholders/web-05.svg', 'images/placeholders/web-05.svg', NULL, '2025', 0, 'published', '2026-11-22 05:17:30', '2026-11-22 05:17:30'),
+(14, 12, 'Analytics Dashboard', 'analytics-dashboard', 'A dashboard with charts, stat cards and filterable tables built as a single-page app.', 'Vue.js, JavaScript, CSS', 'images/placeholders/web-06.svg', 'images/placeholders/web-06.svg', NULL, '2025', 0, 'published', '2026-11-22 05:17:30', '2026-11-22 05:17:30'),
+(15, 10, 'Task Manager', 'task-manager', 'A task manager with create, update, delete and status filtering through a REST API.', 'Vue.js, Laravel, PHP', 'images/placeholders/web-07.svg', 'images/placeholders/web-07.svg', NULL, '2025', 0, 'published', '2026-11-22 05:17:30', '2026-11-22 05:17:30'),
+(16, 10, 'Interactive Quiz', 'interactive-quiz', 'An interactive quiz with timers, instant scoring and a responsive result screen.', 'HTML, CSS, JavaScript', 'images/placeholders/web-08.svg', 'images/placeholders/web-08.svg', NULL, '2025', 0, 'published', '2026-11-22 05:17:30', '2026-11-22 05:17:30'),
+(17, 9, 'Odara', 'odara', 'A responsive company profile website for Odara with a bold visual identity, smooth interactions and a clear content structure.', 'HTML, CSS, JavaScript, Vue.js', 'images/placeholders/web-09.svg', 'images/placeholders/web-09.svg', NULL, '2026', 1, 'published', '2026-11-22 06:25:30', '2026-11-22 06:25:30'),
+(18, 10, 'Libraria', 'libraria', 'A library web app for exploring and managing book collections, with a searchable catalog, borrowing flow and a clean admin area.', 'Vue.js, Laravel, PHP, JavaScript', 'images/placeholders/web-10.svg', 'images/placeholders/web-10.svg', NULL, '2026', 1, 'published', '2026-11-22 06:25:30', '2026-11-22 06:25:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `id` bigint UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `title`, `description`, `icon`, `created_at`, `updated_at`) VALUES
+(1, 'Graphic Design', 'Visual systems, layouts and artwork built with clarity, rhythm and purpose.', 'palette', '2026-11-21 07:06:52', '2026-11-21 07:06:52'),
+(2, 'Branding & Identity', 'Distinctive brand worlds — from strategy and marks to full visual guidelines.', 'sparkles', '2026-11-21 07:06:52', '2026-11-21 07:06:52'),
+(3, 'Social Media Design', 'Scroll-stopping content systems designed for consistent, recognizable presence.', 'instagram', '2026-11-21 07:06:52', '2026-11-21 07:06:52'),
+(4, 'Poster & Advertising', 'Editorial compositions that communicate a single idea with lasting impact.', 'image', '2026-11-21 07:06:52', '2026-11-21 07:06:52'),
+(5, 'Digital Creative Design', 'Experimental visuals, art direction and digital campaigns for modern audiences.', 'wand-sparkles', '2026-11-21 07:06:52', '2026-11-21 07:06:52'),
+(6, 'Web Design', 'High-end interface design with thoughtful interaction and responsive craft.', 'monitor', '2026-11-21 07:06:52', '2026-11-21 07:06:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('0tLWKHbdzVmOzitorG91WbnrFJtqphTTgl43DNOc', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUTI3QlNYQmV1eDhhcm5aa2dnc1FOZEh2ZnRzZjVvZ2RBaEV2TXhORCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795350052),
+('1h2rfBbjLyIDcAAc7oo4t2NhPwYU8aVYt13vaHBo', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTVVKTlhnaU44SVBLR0dNZkFXUUN6RVl3YzZaRWpLZ2tnZDM3VWxCVyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo2OiJsb2NhbGUiO3M6MjoiaWQiO30=', 1795530298),
+('24SOloPxLd95WrV6m4EjITlt8jaTX0HbTFPzqmJA', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYmVlYkFpMGdNNmlwaHNva0syOW52QTlzcjJjdUFMYmt4SkhEbXp3eiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795348222),
+('42vqkDiDYepOGIiFix9bMUJiVXTFtdFMShF7BxDD', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.6456', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNEF1MllIWXpBY3cyVktqZUF5S3VmZDJaVWhyZDlrcDBwQTk5NjRpYyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795350487),
+('5IEHABMTaLoQRJMKoJx8wD2FjIT7HywAs2QeYPrS', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibGpSNUo2QlFWWkg0elVlbWRnN1lrV3VQenpCMTlhN2k3TUlmdkNIeSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795349929),
+('6jnbwHEtKDD1PS1mLJQjo8ymiRrLSWww1nrvD7xW', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSnZDdGNlRXpTSXB3VkVJeVNKbFBoclVYaHR3ZWZnWWZ5a2hjQ3VVMyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795350122),
+('8Wt8OVrNKL8guUqSuPnWOUewHgm3lyKoEGErV8jM', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiOGlUalJ6YWdjNFUybGdKZEtUcmpJazhIcENWc2VvS2s4elhFR0ZjcyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo2OiJsb2NhbGUiO3M6MjoiaWQiO30=', 1795389891),
+('aCgK4MPRS1acu9i3TyZSpnAVwPp9BhuakKYZfP4w', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTUY4bHA2WnM1YmJyY2ttMW9CdmxUZ1o1blNob0VPREhuVHBiYWwxYSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795355872),
+('B8RzckcnXsa1MjyVPwhhw7MARzvDy6fHoP0OjPR9', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.6456', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZk1JanJocEpkRWhuRlJGR1pIMllZbWZMd2tqZGpjSTZ2clZjbDZhMCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795350419),
+('bekipZ4lWFkZpK2beqSyxFgMzMd2tVvU1akbewOZ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMnh5SGVIY2tIcEtZSk9sSTFFSnhvSWVUV2JoWHJXQnpHYWRzSk1SYSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795355855),
+('cXxkdaJamMH20BJh7OeXMQ3XYEcfQvZBeXYJKWoi', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoia2ZHOFIwajhTRnRhcWVVakxtd2l2UzdJR3BDSm5lNnluQzVBMnVpTyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795356076),
+('D0Moz5s9jB8jrUjTwQFGZcHHltbgPndCO4cRYujm', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZTRsdjNualpvVFFiVXQzVWF5ZnBkUGFYTFJmNzVxaGFNemlrWlVSeCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795348336),
+('djYozpKdEqqiGSt7mfTN7gx7Auutfi2TFYOHG8ZV', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTkliTFpvOVBDT1B3NFVUVWhrb2tkR2lDSWtOdWtmanN5Wm04VDloTiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795356924),
+('eLofhodGocgJk0cN5LthrxNIreINTb1FPfSwMNEB', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSGxhR0ltYTFtdFJ3b2hXN3NhUTNITVZIbTZYZFlFOEZ4RW9CQVBwRiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795353945),
+('gbW1GpCTYncWRg26B21i1XrJPSW186G6rQ9zwJpe', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.6456', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaDljeXIwS1ZCcmJlQ0NjSHFtNDRvYzRXQkppTzF3UDJUZ2FRSngzQyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC93b3JrL2xpYnJhcmlhIjtzOjU6InJvdXRlIjtzOjk6Indvcmsuc2hvdyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1795353983),
+('hrU4mkUUixsV1p0Hv9KsqjRsGcNHsMQz58hK7VcO', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.6456', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoib0VCekhwM2xnRTFVQjVmWDk3a1N0NGpYZWM3VWZJeW1PZmhvNFNKRyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC93b3JrL29kYXJhIjtzOjU6InJvdXRlIjtzOjk6Indvcmsuc2hvdyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1795353983),
+('icvJpLemawNnjdLqhf4QaDMdGtyFFoPQKltliML9', NULL, '127.0.0.1', 'curl/8.13.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiR0ZzOG40WVVXb1dKMWMxNUhHenBXczBjbDQ3WEJyZGZnakxqTTlZQSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795348154),
+('ioJVxhtmVFkrUfhWboCxHMBrjEMQ1uMiwMDFq2vl', NULL, '127.0.0.1', 'curl/8.13.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZVM2MDNxNmd1MFhkZmE5TUJQYkRyYWRzN0kyRXZnbndPeGRZNmp6QyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795348166),
+('jRY4QN7DpUhXI7N1VXEHoJ0KYDq8sIitdJhlVehR', NULL, '127.0.0.1', 'curl/8.13.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiblNVWFVWTUh4ek5GankwczJNMFNlakZ3eW9yR1JOaVpOVm1mTnhNVyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795348107),
+('kLLjX4P7VPbxAUbR3luej3s6exaCuTsI1Fk1RMFB', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiRVkyOWQ1clk5R0Y0ZUtlU2VDSVRpVWhYQ0plRTI2eFNpN000cHZTVyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo2OiJsb2NhbGUiO3M6MjoiaWQiO30=', 1795358594),
+('kPoLpg6FZZJRzTzpcIR2reqa1zz0lC8XPIwWC8kp', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQnlwOEpna2QyOTU5aGRDR1hGVEMxQ21SMWtQZURsbzRMS3J2ZFprWCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795355921),
+('lAumO22tYL7U4Rrs2UCfHbai3RKs4D8515VFmWln', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiT25LYmIzYmpNbmRDUGlBejBzYkg0bmQyalQ0TzM3ZU14MHh5Q1IwcyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795355862),
+('LUVZYer4h3aQQuqKkFhDys0i9YNP43rv4GbvsL0e', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZVM4bnpPZFZCU2xuZWFvUngwblFvT1ptR085ZWw2SEVKUUdFeDVWZiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795357238),
+('PoVxmeRDzwZo2LcCDsUGbDwoymJHVT0pM5tLZmDn', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiU05hQ0hlTlU2S1BzSm5TMGhNTnVrZ2s3UU93eWFlcVY5OENzcGpHdCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795356557),
+('rjKg1QQZ29KgjGlLvZdMmXa19qiK7PIKsopYaUbY', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNTIzVGRDYzNGdkxvWDJ5T2lNSm5YUnh6T2R0UWhzTGxrdVpCdGtqWSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795348393),
+('s8J1e1gAv6GBHbLC1a7SWxW3Nw59pzNMWbSzU7TK', NULL, '127.0.0.1', 'curl/8.13.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVjlZbmhWa1oydG5sRmt6MEhKc1BKenFWd053aXBOc1RIdnBZZXNHeCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795348183),
+('Si28ga9bYhV8TVfcjim0fGPyGql1zFC4rHOZohsn', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieGV3R2NwaFJZSUpqeHcyRUpRUlo2OUdLOEp0azRoT1VCVXg3eWxDeSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795350388),
+('TMQwHyed7ceWKwksqfp5VSFeBTjrYCTwQ01KWx8s', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNXNJS3JaZWhPb2RsN1FKNTNCa2FhRm1nMURPdE5VSlQ4QloyWG9kdCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795356048),
+('tsgAGmwPmVPCv6TAzdX8RN8HUtNfBd2JLDFwbNWi', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibTFIYXlBN3JsbmFNdDlUODlRcmtOTnRIS0JxeHoxa3MxTjROQUFtTSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795350426),
+('uhYVrADstBoO7A3M1HgOOhnLIfBF7oBFW3D91ehV', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNkFjaWsxZk03Y2tLWTh6NmhnM1hVc2x2dkpUN1pWTjgwbFpLUGxmdyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo2OiJsb2NhbGUiO3M6MjoiaWQiO30=', 1795350566),
+('UzxsToIZbxF8gYUYuJGA8gZapyjL1OABlROByxj5', NULL, '127.0.0.1', 'curl/8.13.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV0l5UU1FaWU5WGg4TnRtSWtSN1BQTmJDVFFWYjlGNUVIVTcyQjIyTCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795348130),
+('VjyE00PtbwEp7ybaM9CyTduJcOKzDZQ9msdSLj5r', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicHlEcTFlSHFNRXB2NGNJRUszNmg4SDlhM3lLSlQ0SjBUQkZ5S1F5VyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795350618),
+('Wp9FgcrZVmtXnFi1N71XX5mI31TpbjZW6aQ2vY5q', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiREViVU5FSktORXNKSnFPWkEwRTN3Rkh0VVpDc3JKa1dSeHZvNkhySSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795357688),
+('xIV8X0iyTGGpRHIbRN1oqoq2TohPdB0snK45Vgp8', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiR2d2eExLUTY1M0UyWFUxYUNmMnU4cXI0d0hzNWNzM2E2a01XWk9vbCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1795356735);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` bigint UNSIGNED NOT NULL,
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
+(1, 'meta_title', 'Muhammad Iqbal Fadholi — Software Engineering Student & Web Developer', '2026-11-21 07:06:52', '2026-11-22 05:17:30'),
+(2, 'meta_description', 'Portfolio of a Software Engineering student building modern, responsive websites with HTML, CSS, JavaScript, Vue.js, PHP and Laravel.', '2026-11-21 07:06:52', '2026-11-22 05:17:30'),
+(3, 'hero_label', 'SOFTWARE ENGINEERING STUDENT & WEB DEVELOPER', '2026-11-21 07:06:52', '2026-11-22 05:17:30'),
+(4, 'hero_headline', 'BUILDING MODERN WEBSITES.', '2026-11-21 07:06:52', '2026-11-22 05:17:30'),
+(5, 'hero_description', 'I\'m a Software Engineering student who loves turning ideas into modern, responsive websites with HTML, CSS, JavaScript, Vue.js, PHP and Laravel.', '2026-11-21 07:06:52', '2026-11-22 05:17:30'),
+(6, 'hero_status', 'LEARNING · BUILDING · REPEATING', '2026-11-21 07:06:52', '2026-11-22 05:17:30'),
+(7, 'about_title', 'ABOUT ME.', '2026-11-21 07:06:52', '2026-11-22 04:47:16'),
+(8, 'contact_title', 'LET\'S BUILD SOMETHING TOGETHER.', '2026-11-21 07:06:52', '2026-11-22 05:17:30'),
+(9, 'footer_credits', 'Built with Laravel & Vue. Always learning.', '2026-11-21 07:06:52', '2026-11-22 05:17:30'),
+(10, 'meta_title_id', 'Muhammad Iqbal Fadholi — Siswa RPL & Web Developer', '2026-11-22 01:16:21', '2026-11-22 05:17:30'),
+(11, 'meta_description_id', 'Portofolio siswa Rekayasa Perangkat Lunak yang membangun website modern dengan HTML, CSS, JavaScript, Vue.js, PHP, dan Laravel.', '2026-11-22 01:16:21', '2026-11-22 05:17:30'),
+(12, 'hero_label_id', 'SISWA REKAYASA PERANGKAT LUNAK & WEB DEVELOPER', '2026-11-22 01:16:21', '2026-11-22 05:17:30'),
+(13, 'hero_headline_id', 'MEMBANGUN WEBSITE MODERN.', '2026-11-22 01:16:21', '2026-11-22 05:17:30'),
+(14, 'hero_description_id', 'Saya siswa SMK jurusan RPL yang suka mengubah ide menjadi website modern, responsif, dan mudah digunakan dengan HTML, CSS, JavaScript, Vue.js, PHP, dan Laravel.', '2026-11-22 01:16:21', '2026-11-22 05:17:30'),
+(15, 'hero_status_id', 'TERUS BELAJAR · MEMBANGUN · BERKEMBANG', '2026-11-22 01:16:21', '2026-11-22 05:17:30'),
+(16, 'about_title_id', 'TENTANG SAYA.', '2026-11-22 01:16:21', '2026-11-22 04:47:16'),
+(17, 'contact_title_id', 'YUK BANGUN SESUATU BERSAMA.', '2026-11-22 01:16:21', '2026-11-22 05:17:30'),
+(18, 'footer_credits_id', 'Dibangun dengan Laravel & Vue. Terus belajar.', '2026-11-22 01:16:21', '2026-11-22 05:17:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skills`
+--
+
+CREATE TABLE `skills` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `percentage` tinyint UNSIGNED NOT NULL DEFAULT '0',
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `skills`
+--
+
+INSERT INTO `skills` (`id`, `name`, `percentage`, `icon`, `created_at`, `updated_at`) VALUES
+(9, 'HTML', 95, 'html5', '2026-11-22 03:43:53', '2026-11-22 03:43:53'),
+(10, 'CSS', 92, 'css', '2026-11-22 03:43:53', '2026-11-22 03:43:53'),
+(11, 'JavaScript', 90, 'javascript', '2026-11-22 03:43:53', '2026-11-22 03:43:53'),
+(12, 'Vue.js', 88, 'vuejs', '2026-11-22 03:43:53', '2026-11-22 03:43:53'),
+(13, 'Laravel', 86, 'laravel', '2026-11-22 03:43:53', '2026-11-22 03:43:53'),
+(14, 'PHP', 84, 'php', '2026-11-22 03:43:53', '2026-11-22 03:43:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social_links`
+--
+
+CREATE TABLE `social_links` (
+  `id` bigint UNSIGNED NOT NULL,
+  `platform` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `social_links`
+--
+
+INSERT INTO `social_links` (`id`, `platform`, `url`, `created_at`, `updated_at`) VALUES
+(1, 'Instagram', 'https://instagram.com/balllxy_', '2026-11-21 07:06:52', '2026-11-22 04:47:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cache`
+--
+ALTER TABLE `cache`
+  ADD PRIMARY KEY (`key`),
+  ADD KEY `cache_expiration_index` (`expiration`);
+
+--
+-- Indexes for table `cache_locks`
+--
+ALTER TABLE `cache_locks`
+  ADD PRIMARY KEY (`key`),
+  ADD KEY `cache_locks_expiration_index` (`expiration`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `categories_slug_unique` (`slug`);
+
+--
+-- Indexes for table `contact_messages`
+--
+ALTER TABLE `contact_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `contact_messages_is_read_index` (`is_read`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobs_queue_index` (`queue`);
+
+--
+-- Indexes for table `job_batches`
+--
+ALTER TABLE `job_batches`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`),
+  ADD KEY `personal_access_tokens_expires_at_index` (`expires_at`);
+
+--
+-- Indexes for table `profiles`
+--
+ALTER TABLE `profiles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `projects_slug_unique` (`slug`),
+  ADD KEY `projects_category_id_foreign` (`category_id`),
+  ADD KEY `projects_status_featured_index` (`status`,`featured`),
+  ADD KEY `projects_year_index` (`year`),
+  ADD KEY `projects_status_index` (`status`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `settings_key_unique` (`key`);
+
+--
+-- Indexes for table `skills`
+--
+ALTER TABLE `skills`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `skills_name_unique` (`name`);
+
+--
+-- Indexes for table `social_links`
+--
+ALTER TABLE `social_links`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `social_links_platform_unique` (`platform`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `contact_messages`
+--
+ALTER TABLE `contact_messages`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `profiles`
+--
+ALTER TABLE `profiles`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `skills`
+--
+ALTER TABLE `skills`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `social_links`
+--
+ALTER TABLE `social_links`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `projects`
+--
+ALTER TABLE `projects`
+  ADD CONSTRAINT `projects_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
