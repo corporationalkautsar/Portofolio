@@ -5,6 +5,7 @@ import { CheckCircle2 } from 'lucide-vue-next';
 import gsap from 'gsap';
 import SiteNavbar from '../Components/Public/SiteNavbar.vue';
 import SiteFooter from '../Components/Public/SiteFooter.vue';
+import ScrollProgress from '../Components/Public/ScrollProgress.vue';
 import { revealTimeline } from '../composables/useMotion';
 
 const root = ref(null);
@@ -38,6 +39,7 @@ onBeforeUnmount(() => {
 
 <template>
     <div ref="root" class="relative min-h-screen bg-ink text-white">
+        <ScrollProgress />
         <SiteNavbar />
         <main>
             <slot />

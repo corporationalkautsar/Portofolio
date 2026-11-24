@@ -37,7 +37,7 @@ const maxPull = 150;
 
 const baseHeight = computed(() => (isCompact.value ? 88 : 112));
 
-const photo = computed(() => props.profile?.photo_url || '/images/placeholders/profile.svg');
+const photo = computed(() => props.profile?.photo_url || '/images/profile/muhammad-iqbal-fadholi.png');
 const name = computed(() => props.profile?.name || t('footer.portfolioFallback'));
 const profession = computed(() => props.profile?.profession || t('home.profession'));
 const email = computed(() => props.profile?.email || 'hello@example.com');

@@ -3,13 +3,16 @@ import { route } from 'ziggy-js';
 import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
 import gsap from 'gsap';
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, Mail, MapPin, MessageCircle, Send } from 'lucide-vue-next';
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, Copy, Mail, MapPin, MessageCircle, Send } from 'lucide-vue-next';
 
 const HeroSculpture = defineAsyncComponent(() => import('../../Components/Public/HeroSculpture.vue'));
 import SectionHeading from '../../Components/Public/SectionHeading.vue';
 import ProfileIdCard from '../../Components/Public/ProfileIdCard.vue';
 import ProjectCard from '../../Components/Public/ProjectCard.vue';
 import SkillLogo from '../../Components/Public/SkillLogo.vue';
+import AnimatedCounter from '../../Components/Public/AnimatedCounter.vue';
+import LocalClock from '../../Components/Public/LocalClock.vue';
+import TechMarquee from '../../Components/Public/TechMarquee.vue';
 import { resolveDescription } from '../../utils/seo';
 import { prefersReducedMotion } from '../../composables/useMotion';
 import { useI18n } from '../../composables/useI18n';
@@ -112,6 +115,20 @@ watch(activeCategory, async () => {
 
 const form = useForm({ name: '', email: '', subject: '', message: '', website: '' });
 const sent = ref(false);
+const emailCopied = ref(false);
+
+async function copyEmail() {
+    const email = props.profile?.email;
+    if (!email || !navigator.clipboard) return;
+
+    try {
+        await navigator.clipboard.writeText(email);
+        emailCopied.value = true;
+        window.setTimeout(() => { emailCopied.value = false; }, 2000);
+    } catch {
+        emailCopied.value = false;
+    }
+}
 
 function submit() {
     form.post(route('contact.store'), {
@@ -183,6 +200,10 @@ onBeforeUnmount(() => heroContext?.revert());
                     </span>
                 </div>
 
+                <div data-hero-fade class="mt-6">
+                    <LocalClock />
+                </div>
+
                 <div data-hero-fade class="mt-10 flex flex-wrap items-center gap-4">
                     <a href="#works" class="btn btn-primary">
                         {{ t('home.exploreWork') }} <ArrowRight :size="15" />
@@ -215,6 +236,8 @@ onBeforeUnmount(() => heroContext?.revert());
         </div>
     </section>
 
+    <TechMarquee />
+
     <!-- ABOUT -->
     <section id="about" class="border-t border-line py-24 md:py-36">
         <div class="shell">
@@ -237,15 +260,15 @@ onBeforeUnmount(() => heroContext?.revert());
 
                     <div data-stagger class="mt-10 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line">
                         <div class="bg-panel p-5">
-                            <p class="font-display text-2xl font-semibold text-white">{{ skills.length }}</p>
+                            <p class="font-display text-2xl font-semibold text-white"><AnimatedCounter :value="skills.length" /></p>
                             <p class="mt-2 text-[10px] uppercase tracking-wider text-muted">{{ t('home.disciplines') }}</p>
                         </div>
                         <div class="bg-panel p-5">
-                            <p class="font-display text-2xl font-semibold text-white">{{ projects.length }}</p>
+                            <p class="font-display text-2xl font-semibold text-white"><AnimatedCounter :value="projects.length" /></p>
                             <p class="mt-2 text-[10px] uppercase tracking-wider text-muted">{{ t('home.projects') }}</p>
                         </div>
                         <div class="bg-panel p-5">
-                            <p class="font-display text-2xl font-semibold text-white">{{ categories.length }}</p>
+                            <p class="font-display text-2xl font-semibold text-white"><AnimatedCounter :value="categories.length" /></p>
                             <p class="mt-2 text-[10px] uppercase tracking-wider text-muted">{{ t('home.categories') }}</p>
                         </div>
                     </div>
@@ -343,9 +366,21 @@ onBeforeUnmount(() => heroContext?.revert());
                     <p data-reveal class="mt-4 max-w-sm text-sm leading-relaxed text-muted">{{ t('home.contactAvailability') }}</p>
 
                     <div data-stagger class="mt-10 space-y-5">
-                        <a v-if="profile?.email" :href="`mailto:${profile.email}`" class="flex items-center gap-4 text-sm text-white transition-colors hover:text-accent">
-                            <Mail :size="18" class="text-accent" /> {{ profile.email }}
-                        </a>
+                        <div v-if="profile?.email" class="flex flex-wrap items-center gap-3">
+                            <a :href="`mailto:${profile.email}`" class="flex items-center gap-4 text-sm text-white transition-colors hover:text-accent">
+                                <Mail :size="18" class="text-accent" /> {{ profile.email }}
+                            </a>
+                            <button
+                                type="button"
+                                class="inline-flex items-center gap-1.5 rounded-full border border-line bg-panel/60 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted transition-colors hover:border-accent/50 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                                :aria-label="t('home.copyEmail')"
+                                @click="copyEmail"
+                            >
+                                <Check v-if="emailCopied" :size="12" class="text-accent" />
+                                <Copy v-else :size="12" />
+                                {{ emailCopied ? t('home.copied') : t('home.copyEmail') }}
+                            </button>
+                        </div>
                         <a v-if="profile?.whatsapp" :href="profile.whatsapp" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 text-sm text-white transition-colors hover:text-accent">
                             <MessageCircle :size="18" class="text-accent" /> {{ t('home.whatsapp') }} Â· {{ whatsappNumber }}
                         </a>

@@ -95,6 +95,8 @@ return [
         'contactLead' => "Let's make something worth remembering.",
         'contactAvailability' => 'Currently accepting select projects. I usually reply within a couple of days.',
         'whatsapp' => 'WhatsApp',
+        'copyEmail' => 'Copy email',
+        'copied' => 'Copied!',
         'formName' => 'Name',
         'formNamePlaceholder' => 'Your name',
         'formEmailPlaceholder' => 'you@example.com',

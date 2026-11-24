@@ -1,59 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Portofolio — Muhammad Iqbal Fadholi
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Portofolio pribadi berbasis **Laravel + Inertia + Vue 3 + Tailwind**, dengan konten bilingual (Indonesia / Inggris), ID card interaktif, dan animasi ringan.
 
-## About Laravel
+## Fitur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Halaman utama: hero, about, skills, projects, contact.
+- Bahasa ID/EN (switcher globe di kanan atas).
+- ID card drag-able dengan foto asli, QR code, dan flip.
+- Project Odara & Libraria tampil terdepan.
+- Scroll progress, tech marquee, animated counter, dan jam lokal Besuki (WIB).
+- Form kontak tersimpan di database.
+- Panel admin untuk mengelola profile, project, skill, dan settings.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Setup setelah `git clone`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+> Penting: file `.env`, `vendor/`, `node_modules/`, `public/build/`, dan `database/database.sqlite` **tidak ikut ter-commit**. Tanpa langkah di bawah, foto di ID card bisa memakai fallback dan data halaman kosong.
 
-## Learning Laravel
+```bash
+git clone https://github.com/corporationalkautsar/Portofolio.git
+cd Portofolio
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+# 1. Dependensi PHP
+composer install
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# 2. Dependensi JS + build aset (wajib, karena public/build tidak disimpan)
+npm install
+npm run build
 
-## Laravel Sponsors
+# 3. Environment
+cp .env.example .env
+php artisan key:generate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# 4. Database SQLite (file-nya tidak ikut clone)
+touch database/database.sqlite
+php artisan migrate --seed
 
-### Premium Partners
+# 5. Storage link (untuk aset yang di-upload lewat admin)
+php artisan storage:link
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# 6. Jalankan
+php artisan serve
+```
 
-## Contributing
+Buka `http://127.0.0.1:8000`.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Catatan Windows / Laragon
 
-## Code of Conduct
+- `cp` dan `touch` bisa diganti lewat PowerShell:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```powershell
+Copy-Item .env.example .env
+New-Item -ItemType File -Path database\database.sqlite -Force
+```
 
-## Security Vulnerabilities
+- Jalankan migrate + seed:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```powershell
+php artisan migrate --seed
+```
+
+### Kenapa foto ID card bisa hilang setelah clone?
+
+Foto asalnya ada di `public/images/profile/muhammad-iqbal-fadholi.png` dan **sudah ikut ter-commit**. Yang tidak ikut adalah database SQLite, sehingga tabel `profiles` kosong dan `profile?.photo_url` bernilai null. Sekarang komponen `ProfileIdCard.vue` sudah punya fallback langsung ke foto asli, jadi foto tetap muncul walau database belum di-seed. Untuk data lengkap (nama, bio, kontak, project), tetap jalankan `php artisan migrate --seed`.
+
+## Test
+
+```bash
+php artisan test
+```
+
+## Akun admin
+
+Seeder **tidak** membuat akun admin. Buat sendiri setelah migrate:
+
+```bash
+php artisan portfolio:admin
+```
+
+Perintah akan menanyakan email, nama, dan password (minimal 12 karakter). Akun yang dibuat otomatis berstatus admin dan bisa login di `/admin/login`.
+
+## Kontak
+
+- Email: akunmlbb223434@gmail.com
+- WhatsApp: 081515274402
+- Instagram: balllxy_
+- Lokasi: Besuki, Situbondo, Jawa Timur, Indonesia
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT.

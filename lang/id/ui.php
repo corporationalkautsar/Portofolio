@@ -95,6 +95,8 @@ return [
         'contactLead' => 'Mari buat sesuatu yang layak dikenang.',
         'contactAvailability' => 'Saat ini menerima beberapa proyek pilihan. Biasanya saya membalas dalam beberapa hari.',
         'whatsapp' => 'WhatsApp',
+        'copyEmail' => 'Salin email',
+        'copied' => 'Tersalin!',
         'formName' => 'Nama',
         'formNamePlaceholder' => 'Nama kamu',
         'formEmailPlaceholder' => 'kamu@contoh.com',
