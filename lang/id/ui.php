@@ -127,7 +127,7 @@ return [
         'works' => 'karya',
         'digitalPass' => 'Kartu digital',
         'back' => 'BELAKANG',
-        'scan' => 'Pindai untuk membuka portofolio',
+        'scan' => 'Pindai untuk simpan kontak saya',
         'tapToFlip' => 'Ketuk kartu untuk membalik',
         'dragHint' => 'Tarik ke arah mana pun · Ketuk untuk membalik',
     ],

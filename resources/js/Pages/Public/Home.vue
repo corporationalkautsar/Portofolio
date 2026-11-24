@@ -244,7 +244,11 @@ onBeforeUnmount(() => heroContext?.revert());
             <SectionHeading :eyebrow="t('home.aboutEyebrow')" :number="'02'" :title="setting('about_title', t('home.aboutTitle'))" />
 
             <div class="mt-16 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-                <ProfileIdCard :profile="profile" :projects-count="projects.length" />
+                <ProfileIdCard
+                    :profile="profile"
+                    :projects-count="projects.length"
+                    :qr-url="settings.qr_url || 'https://github.com/corporationalkautsar/Portofolio'"
+                />
 
                 <div>
                     <p data-reveal class="font-display text-2xl leading-snug text-white md:text-3xl">

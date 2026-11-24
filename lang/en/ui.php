@@ -127,7 +127,7 @@ return [
         'works' => 'works',
         'digitalPass' => 'Digital pass',
         'back' => 'BACK',
-        'scan' => 'Scan to open portfolio',
+        'scan' => 'Scan to save my contact',
         'tapToFlip' => 'Tap card to flip back',
         'dragHint' => 'Drag any direction · Tap to flip',
     ],

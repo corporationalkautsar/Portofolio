@@ -59,6 +59,31 @@ New-Item -ItemType File -Path database\database.sqlite -Force
 php artisan migrate --seed
 ```
 
+### QR code di ID card
+
+QR tidak lagi mengisi alamat halaman yang sedang dibuka. Isinya sekarang **MECARD**, jadi setelah dipindai dari HP, kontak bisa langsung disimpan:
+
+- Nama
+- Email
+- WhatsApp
+- Lokasi
+- URL portofolio (dari setting `qr_url`)
+
+Default `qr_url` = `https://github.com/corporationalkautsar/Portofolio`. Bisa diganti lewat **Admin → Settings → qr_url** (misalnya ke domain production setelah deploy).
+
+### Akun admin vs akun biasa
+
+- **Admin** (`is_admin = true`): bisa login di `/admin` untuk mengelola profile, project, kategori, skill, social link, setting, dan pesan kontak.
+- **Akun biasa** (`is_admin = false`): tidak bisa masuk `/admin` (403). Saat ini tidak ada registrasi publik, jadi akun biasa hanya bisa dibuat manual dan tidak punya fungsi di halaman depan.
+
+Buat akun admin dengan:
+
+```bash
+php artisan portfolio:admin
+```
+
+Perintah akan menanyakan email, nama, dan password (minimal 12 karakter). Seeder **tidak** membuat akun admin otomatis.
+
 ### Kenapa foto ID card bisa hilang setelah clone?
 
 Foto asalnya ada di `public/images/profile/muhammad-iqbal-fadholi.png` dan **sudah ikut ter-commit**. Yang tidak ikut adalah database SQLite, sehingga tabel `profiles` kosong dan `profile?.photo_url` bernilai null. Sekarang komponen `ProfileIdCard.vue` sudah punya fallback langsung ke foto asli, jadi foto tetap muncul walau database belum di-seed. Untuk data lengkap (nama, bio, kontak, project), tetap jalankan `php artisan migrate --seed`.
@@ -68,16 +93,6 @@ Foto asalnya ada di `public/images/profile/muhammad-iqbal-fadholi.png` dan **sud
 ```bash
 php artisan test
 ```
-
-## Akun admin
-
-Seeder **tidak** membuat akun admin. Buat sendiri setelah migrate:
-
-```bash
-php artisan portfolio:admin
-```
-
-Perintah akan menanyakan email, nama, dan password (minimal 12 karakter). Akun yang dibuat otomatis berstatus admin dan bisa login di `/admin/login`.
 
 ## Kontak
 

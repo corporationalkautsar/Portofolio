@@ -10,6 +10,7 @@ const { t } = useI18n();
 const props = defineProps({
     profile: { type: Object, default: null },
     projectsCount: { type: Number, default: 0 },
+    qrUrl: { type: String, default: '' },
 });
 
 const card = ref(null);
@@ -44,10 +45,26 @@ const email = computed(() => props.profile?.email || 'hello@example.com');
 const location = computed(() => props.profile?.location || t('card.location'));
 const projectCode = computed(() => String(props.projectsCount).padStart(2, '0'));
 
-const qrValue = computed(() => {
-    if (typeof window === 'undefined') return 'https://example.com';
+const whatsappNumber = computed(() => {
+    const digits = (props.profile?.whatsapp || '').replace(/\D/g, '');
+    if (!digits) return '';
 
-    return window.location.origin;
+    return digits.startsWith('62') ? `+${digits}` : `+62${digits.replace(/^0/, '')}`;
+});
+
+const escapeMecard = (value) => String(value || '').replace(/[\\;,:]/g, '\\$&');
+
+const qrValue = computed(() => {
+    const fields = [
+        `N:${escapeMecard(name.value)}`,
+        email.value ? `EMAIL:${escapeMecard(email.value)}` : '',
+        whatsappNumber.value ? `TEL:${whatsappNumber.value}` : '',
+        location.value ? `ADR:;;;${escapeMecard(location.value)};;;` : '',
+        `URL:${escapeMecard(props.qrUrl || 'https://github.com/corporationalkautsar/Portofolio')}`,
+        `NOTE:${escapeMecard(`Portfolio ID · ${projectCode.value} projects`)}`,
+    ].filter(Boolean);
+
+    return `MECARD:${fields.join(';')};;`;
 });
 
 const strapPaths = computed(() => {

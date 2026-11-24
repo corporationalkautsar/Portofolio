@@ -19,6 +19,7 @@ class SettingSeeder extends Seeder
             'about_title' => 'ABOUT ME.',
             'contact_title' => "LET'S BUILD SOMETHING TOGETHER.",
             'footer_credits' => 'Built with Laravel & Vue. Always learning.',
+            'qr_url' => 'https://github.com/corporationalkautsar/Portofolio',
             'meta_title_id' => 'Muhammad Iqbal Fadholi — Siswa RPL & Web Developer',
             'meta_description_id' => 'Portofolio siswa Rekayasa Perangkat Lunak yang membangun website modern dengan HTML, CSS, JavaScript, Vue.js, PHP, dan Laravel.',
             'hero_label_id' => 'SISWA REKAYASA PERANGKAT LUNAK & WEB DEVELOPER',
